@@ -6,20 +6,20 @@ The information present in this document is mostly related to the changes made i
 
 List of Changes:
 - Allows the use of Coqui-AI TTS as the local speech generation. New voices can be easily added by putting an audio file at audio\voices. For more information about Coqui-AI TTS, please see (https://github.com/coqui-ai/TTS);
-- Added Cuda support to allow the user to choose between CPU, or one of the installed graphic cards.
+- Added Cuda support to allow the user to choose between CPU, or one of the installed graphic cards;
 - Removed some application-specific files;
 - Other minor code changes.
 
-The Coqui-ai is select as default as the TTS engine. To change is SPQR.TextAudioTool/config.py, which has the following new options:
+The Coqui-ai is selected as the default TTS engine. The config changes are made at SPQR.TextAudioTool/config.py, which has the following new options:
 - USE_COQUI_TTS -> True or False, indicating if Coqui-AI should be used;
 - USE_GPU -> "-1" means CPU, "0" means the first GPU, and "1" mean your second GPU;
-- TORCH_GPU_INSTALL -> Changed only if necessary. The pip install command for  Torch to allow the use of GPU;
+- TORCH_GPU_INSTALL -> The pip install command for Torch to allow the use of GPU. Change only if necessary;
 - TORCH_FORCE_REINSTALL -> If you are unable to make Cuda work, try setting this to True once.
 
 Note that you should at least try to set USE_GPU as "0" (meaning first GPU) due to performance reasons. If your video card gets out of memory, then you should consider going back to "-1" (which means CPU).
 
 
-Please note that you might need to run "SPQR.TextAudioTool - (standalone).bat" a few times during the installation and after changing the parameters at "SPQR.TextAudioTool/config.py". If you get an error, the first thing to do is try rerunning it.
+Please note that you might need to run "SPQR.TextAudioTool - (standalone).bat" a few times during the installation or after changing the parameters at "SPQR.TextAudioTool/config.py". If you get an error, the first thing to do is try rerunning it.
 
 
 # License
