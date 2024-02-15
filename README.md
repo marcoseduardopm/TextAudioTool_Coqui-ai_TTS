@@ -1,50 +1,32 @@
 # About TextAudioTool
-Very quick & simple python tool that creates local api endpoints for TTS &amp; STT. It was created for a Virt-A-Mate mod but it can be used for other games & applications too.
-It installs miniconda and the required dependencies, then starts a local server running at 127.0.0.1:7069 which has endpoints for local TTS (old school SAPI voices) and STT (using Whisper - tiny version).
 
-![img](https://github.com/5PQR/TextAudioTool/assets/122448634/7aeb85c7-0b09-4cb6-a177-172911639139)
+This repository is a Fork of the (https://github.com/5PQR/TextAudioTool). The original TextAudioTool is a very quick & simple Python tool that creates local API endpoints for TTS &amp; STT. For more information, please see to original repository. 
 
+The information present in this document is mostly related to the changes made in comparison with the original repository.
 
-# Install for VaM
-## 1. Install ffmpeg
-ffmpeg is a tool that converts videos & audio files. Whisper needs it to do it's STT magic (https://github.com/openai/whisper#setup)
-if you don't already have it you can install it by following this guide https://www.wikihow.com/Install-FFmpeg-on-Windows. **There are basically two big steps**: 1) download ffmpeg, then 2) add ffmpeg to the system environment variables. You can check if you have it by opening command prompt and typing "ffmpeg".
+List of Changes:
+- Allows the use of Coqui-AI TTS as the local speech generation. New voices can be easily added by putting an audio file at audio\voices. For more information about Coqui-AI TTS, please see (https://github.com/coqui-ai/TTS);
+- Added Cuda support to allow the user to choose between CPU, or one of the installed graphic cards.
+- Removed some application-specific files;
+- Other minor code changes.
 
-![img2](https://github.com/5PQR/TextAudioTool/assets/122448634/331d678f-db29-49e5-9048-d2ccf5eadd56)
+The Coqui-ai is select as default as the TTS engine. To change is SPQR.TextAudioTool/config.py, which has the following new options:
+- USE_COQUI_TTS -> True or False, indicating if Coqui-AI should be used;
+- USE_GPU -> "-1" means CPU, "0" means the first GPU, and "1" mean your second GPU;
+- TORCH_GPU_INSTALL -> Changed only if necessary. The pip install command for  Torch to allow the use of GPU;
+- TORCH_FORCE_REINSTALL -> If you are unable to make Cuda work, try setting this to True once.
 
-Tip: after you install it, if you want to check if it works, type it in a new command prompt window. If it's an old window from before the install, it will still show as not found. 
-
-## 2. Download files
-You can get the zip from https://github.com/5PQR/TextAudioTool/releases/latest and extract the file in the VaM folder, so that the .bat files like "SPQR.TextAudioTool - (VaM.exe).bat" & the SPQR.TextAudioTool folder are in the same folder as VaM.exe.
-
-![img3](https://github.com/5PQR/TextAudioTool/assets/122448634/d9646779-7ba9-474d-882a-0cc3b19ce091)
-
-
-## 3. Install 
-You can now run **SPQR.TextAudioTool - (standalone).bat** and it will automatically install in SPQR.TextAudioTool/installer_files the dependencies it needs. The first time it will take a couple of minutes, but after that it should be quicker. The other bat files do the same thing, but also open VaM. I added them to have a single shortcut open VaM and the text audio tool at the same time.
-
-If everything went OK, the command prompt should show READY and the tool's endpoints should be available:
-![img4](https://github.com/5PQR/TextAudioTool/assets/122448634/2bcfc915-bb97-440d-b72f-76455d6b20b7)
+Note that you should at least try to set USE_GPU as "0" (meaning first GPU) due to performance reasons. If your video card gets out of memory, then you should consider going back to "-1" (which means CPU).
 
 
-## 4.Run
-After installing it's best to close it and opening the tool again. You can test the endpoints in a browser by opening demo/demo.html. Hitting "Test response" buttons should generate responses similar to the example ones if everything is working properly.
+Please note that you might need to run "SPQR.TextAudioTool - (standalone).bat" a few times during the installation and after changing the parameters at "SPQR.TextAudioTool/config.py". If you get an error, the first thing to do is try rerunning it.
 
-# Config
-You can edit SPQR.TextAudioTool\config.py in any text editor and change there a few settings like the WPM rate for the offline voice and the language and model type used for detecting speech to text. More info about each setting can be found in the file.
-
-# Update
-To update from v0.1 to v0.2 you can delete the old SPQR.TextAudioTool folder and replace it with the one from the latest zip. Or more quickly to skip the script installing everything again, you can just replace SPQR.TextAudioTool.script.py & config.py and everything else can stay the same.
-
-# Usage for VaM
-When the tool is running, it should be possible from VaM to do TTS & STT by accessing the endpoints.
-The tool can be opened/closed at any time. I added the extra bat files like "SPQR.TextAudioTool - VaM (Desktop Mode).bat" as a shortcut to open both vam + the text audio tool, but the tool can be opened later too from "SPQR.TextAudioTool - (standalone).bat" even after VaM is already running.
-
-# Usage for other applications
-Same as above but only the **SPQR.TextAudioTool** folder is necessary, the extra .bat files can be removed, or you can keep just the bat with (standalone) in the name. To run it you can open SPQR.TextAudioTool.bat directly, or the (standalone) bat which is a shortcut to the one inside the folder, meant to be easier to find.
 
 # License
-Feel free to use the rest of my code in any way you want for any purposes, but if you use the SPQR.TextAudioTool.bat you have to follow the AGPL license because that script was based on an agpl licensed script. For commercial purposes you're better off just making that logic from scratch, it's just a download file & install, chatgpt can help. I was confused by the license and got stuck with it.
+AGPL license because that script was based on an agpl licensed script.
+The Coqui-AI TTS model has its own license terms related to its model. Please see https://github.com/coqui-ai/TTS.
 
 # Credits
-* The installer script ( SPQR.TextAudioTool.bat) that downloads and installs miniconda is based on oobabooga's install script made for https://github.com/oobabooga/one-click-installers , I only changed the python script it loads
+* To the main author of the original repository (https://github.com/5PQR/TextAudioTool)
+* Coqui-AI TTS (https://github.com/coqui-ai/TTS)
+* The installer script (SPQR.TextAudioTool.bat) that downloads and installs miniconda is based on oobabooga's install script made for https://github.com/oobabooga/one-click-installers , I only changed the python script it loads
