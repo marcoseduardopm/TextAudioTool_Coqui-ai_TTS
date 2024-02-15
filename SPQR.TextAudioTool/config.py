@@ -1,6 +1,6 @@
 ##======= CUDA_SUPPORT =======##
 #Leave as "-1" if you want to use your CPU, "0" if you want to use your first GPU, and "1" if you want to use your second GPU (in case you have 2 GPUs)
-USE_GPU = "1"
+USE_GPU = "-1"
 #If using GPU, which version to install?  See https://pytorch.org/. Change only if it doesn't work after a few attempts.
 TORCH_GPU_INSTALL = "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118"
 
